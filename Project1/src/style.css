@@ -106,9 +106,53 @@ body {
 
 .text a{
   display: inline-block;
+  font-size: 1rem;
+  font-weight:bold;
+  background-color: var(--font-color);
+  padding: 10px 30px;
+  text-transform: uppercase;
+  color: var(--background-color);
+  text-decoration: none;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 20px;
 }
-.menu {
-  display: none;
+
+.text a:hover{
+  letter-spacing: 6px;
+  padding: 20px 60px;
+  font-size: 2rem;
+}
+
+.social {
+  position: absolute;
+  bottom: 50px;
+  z-index: 3;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.social li {
+  list-style: none;
+}
+
+.social li a {
+  display: inline-block;
+  margin-right: 20px;
+  filter: invert(1);
+  transition: 0.5s;
+}
+
+.social li a:hover {
+  transform: translateY(-10px);
+}
+
+/* .menu {
+  display: none; 
   color: var(--background-color);
   background-color: var(--font-color);
-}
+  padding: 10px 30px;
+} */
