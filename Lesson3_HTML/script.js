@@ -522,93 +522,127 @@
     circle3.draw()
 }
 
+{
+const content = document.querySelector(".content");
+// content.innerHTML = "Hahahaha";
 
-// const content = document.querySelector(".content");
-// // content.innerHTML = "Hahahaha";
+console.log(content);
 
-// console.log(content);
+const contents = document.querySelectorAll(".content");
 
-// const contents = document.querySelectorAll(".content");
+console.log(contents);
 
-// console.log(contents);
+contents.forEach((node, index) => {
+  node.innerHTML = `content ${index}`;
+});
 
-// contents.forEach((node, index) => {
-//   node.innerHTML = `content ${index}`;
-// });
+const span = document.createElement("div"); //创造元素
+span.innerHTML = "<h1>Click Me</h1>";
+// contents[contents.length - 1].append(span)
+// contents[contents.length - 1].appendChild(span)
+const domBody = document.querySelector("body");
+domBody.appendChild(span);
 
-// const span = document.createElement("div"); //创造元素
-// span.innerHTML = "<h1>Click Me</h1>";
-// // contents[contents.length - 1].append(span)
-// // contents[contents.length - 1].appendChild(span)
-// const domBody = document.querySelector("body");
-// domBody.appendChild(span);
+span.classList.add("active");
+span.classList.remove("active");
+span.classList.toggle("active");
 
-// span.classList.add("active");
-// span.classList.remove("active");
-// span.classList.toggle("active");
+span.setAttribute("style", "cursor: pointer");
 
-// span.setAttribute("style", "cursor: pointer");
+span.addEventListener("click", () => {
+  span.classList.toggle("active");
+});
+}
 
-// span.addEventListener("click", () => {
-//   span.classList.toggle("active");
-// });
+{
 
 
-// {
+const circle3 = { radius, location, isVisible, draw }
 
-  
+function createCircle(radius) {
+  return {
+     radius,
+    draw1() {
+      console.log('draw1', radius, this.radius);
+    },
+    draw2: function () {
+    console.log('draw2', radius, this.radius);
+    },
+    draw3: () => {
+    console.log('draw3', radius, this.radius);
+    },
+  }
+}
+//加this是自己的radius，不加是外界来的
+const circle4 = createCircle(4)
+circle4.radius = 2
 
-// const circle3 = { radius, location, isVisible, draw }
+circle4.draw1()
+circle4.draw2()
+circle4.draw3()
 
-// function createCircle(radius) {
-//   return {
-//     radius,
-//     draw1() {
-//       console.log('draw1', radius, this.radius);
-//     },
-//     draw2: function () {
-//     console.log('draw2', radius, this.radius);
-//     },
-//     draw3: () => {
-//     console.log('draw3', radius, this.radius);
-//     },
-//   }
-// }
+//例子
+const obj = {
+  a: 2, //这里a不是定义，跟下面函数里面的a只是并列关系，都是ojb的属性
+  changeA: function() {
+    a = 3 //this.a = 3 我这个属性想改变这obj a的值，我未必就是指的是obj的值，需要加this才能表示
+  }
+} 
 
-// const circle4 = createCircle(4)
-// circle4.radius = 2
+obj.changeA();
+console.log(obj.a);
+//例子结束
 
-// circle4.draw1()
-// circle4.draw2()
-// circle4.draw3()
 
-// class NewClass {
-//   static total = 100
-//   borrow() {
-//     NewClass.total--
-//     console.log(NewClass.total);
-//   }
-//   bringBack() {
-//     NewClass.total++
-//     console.log(NewClass.total);
-//   }
+//构造函数，js独有，产生的永远是一个object，一般return是一个obj，这里天生是一个obj
+function Circle(radius) {
+  this.radius = radius
+  this.draw1 = function () {
+/**上面568，571要用：冒号，
+ * 因为是字典，映射关系。
+ * 这里obj里面有这个属性，
+ * 叫draw1，它等于一个function**/
+  console.log('draw1', this.radius);
+  }
+  this.draw2 = () => {
+    console.log('draw2', this.radius)
+  }
+}
 
-//   static clean () {
-//     NewClass.total = 0
-//     console.log(NewClass.total);
-//   }
-// }
+const circle5 = new Circle5()
+console.log(circle5);
+circle5.draw1()
+circle5.draw2()
+//使用这个方法可以规避掉没有作用域
 
-// const newClass = new NewClass()
-// const newClass2 = new NewClass()
-// const newClass3 = new NewClass()
-// const newClass4 = new NewClass()
-// newClass.borrow()
-// newClass2.borrow()
-// newClass3.bringBack()
-// newClass4.bringBack()
-// NewClass.clean()
 
+
+class NewClass {
+  static total = 100
+  borrow() {
+    NewClass.total--
+    console.log(NewClass.total);
+  }
+  bringBack() {
+    NewClass.total++
+    console.log(NewClass.total);
+  }
+
+  static clean () {
+    NewClass.total = 0
+    console.log(NewClass.total);
+  }
+}
+
+const newClass = new NewClass()
+const newClass2 = new NewClass()
+const newClass3 = new NewClass()
+const newClass4 = new NewClass()
+newClass.borrow()
+newClass2.borrow()
+newClass3.bringBack()
+newClass4.bringBack()
+NewClass.clean()
 
 
 }
